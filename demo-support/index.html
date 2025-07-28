@@ -9,57 +9,44 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script type="module">
-      /**
-       * Load file
-       * @author NTSAN 08.06.2025
-       */
-      function _loadSource(tag, config) {
-        var el = document.createElement(tag);
-        if (config) {
-          for (let i in config) {
-            el[i] = config[i];
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Vite + React + TS</title>
+      </head>
+      <body>
+        <div id="root"></div>
+        <script type="module">
+          /**
+           * Load file
+           * @author NTSAN 08.06.2025
+           */
+          function _loadSource(tag, config) {
+            var el = document.createElement(tag);
+            if (config) {
+              for (let i in config) {
+                el[i] = config[i];
+              }
+            }
+            document.head.appendChild(el);
           }
-        }
-        document.head.appendChild(el);
-      }
 
-      /**
-       * Lấy tên file config theo môi trường
-       * @returns
-       * @author NTSAN 12.06.2025
-       */
-      function getDomainCdnByEnv() {
-        let domainCdn = "https://testcdnamisapp.misacdn.net/chat";
-        const hostname = window.location.hostname;
-        switch (hostname) {
-          case "":
-          case "localhost":
-            domainCdn = "http://localhost:8888/";
-            break;
-          case "apps.amispdc.misa.local":
-            domainCdn = "https://cdnapps.amispdc.misa.local/chat";
-            break;
-          case "testamisapp.misa.vn":
-            domainCdn = "https://testcdnamisapp.misacdn.net/chat";
-            break;
-        }
-
-        return domainCdn;
-      }
-
-      let url = getDomainCdnByEnv();
-
-      _loadSource("script", {
-        src: `https://testcdnamisapp.misacdn.net/chat/libs/chat-customer-0.0.0/core.js`,
-        type: "text/javascript",
-        onload: async () => {
-          window.initAmisSupport({
-            clientId: "1",
-            identityId: "1",
+          _loadSource("script", {
+            src: `https://testcdnamisapp.misacdn.net/support/libs/chat-customer-0.0.0/core.js`,
+            type: "text/javascript",
+            onload: async () => {
+              window.initAmisSupport({
+                clientId: "1",
+                identityId: "1",
+                environment: "TestOnline",
+              });
+            },
           });
-        },
-      });
-    </script>
+        </script>
+      </body>
+    </html>
   </body>
 </html>
